@@ -7,7 +7,7 @@ public class EchoClient {
 
     public static void main(String[] args) throws IOException {
 
-        Socket s = new Socket("127.0.0.1", 5555);
+        Socket s = new Socket(InetAddress.getLocalHost(), 6666);
         BufferedReader sock_in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         PrintWriter sock_out = new PrintWriter(new OutputStreamWriter(s.getOutputStream()), true);
         BufferedReader std_in = new BufferedReader(new InputStreamReader(System.in));
@@ -15,7 +15,6 @@ public class EchoClient {
         
         while (true) {
             sock_out.println(std_in.readLine());
-            //std_out.println(sock_in.readLine());
             System.out.println(sock_in.readLine());
         }
     }
