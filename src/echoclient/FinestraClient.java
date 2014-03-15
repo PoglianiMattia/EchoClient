@@ -29,6 +29,7 @@ public class FinestraClient extends javax.swing.JFrame {
      */
     public FinestraClient() throws IOException {
         s = new Socket(InetAddress.getLocalHost(), 6666);
+   //     s = new Socket(InetAddress.getByName("10.1.30.28"), 6000);
         sock_in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         sock_out = new PrintWriter(new OutputStreamWriter(s.getOutputStream()), true);
         
@@ -129,12 +130,12 @@ public class FinestraClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
         frase = TextField.getText();
         sock_out.println(frase);
         try {
             TextArea.append("\n"+sock_in.readLine());
-        } catch (IOException ex) { }
-        
+        } catch (IOException ex) { }        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextFieldMouseEntered
@@ -154,19 +155,13 @@ public class FinestraClient extends javax.swing.JFrame {
         
         if(checkbox.getState()){
             if(!maiuscole){
-                sock_out.println("maiuscole: on");
-                try {
-                    sock_in.readLine();
-                } catch (IOException ex) { }    
+                sock_out.println("maiuscole: on");   
                 maiuscole = true;
             }
         }
         else{
             if(maiuscole){
                 sock_out.println("maiuscole: off");
-                try {
-                    sock_in.readLine();
-                } catch (IOException ex) { }  
                 maiuscole = false;
             }
         }
